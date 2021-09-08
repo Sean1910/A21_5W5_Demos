@@ -25,6 +25,12 @@ namespace CrazyBook_DataAccess.Data
 
       //composite key
       modelBuilder.Entity<AuthorBook>().HasKey(ba => new { ba.Author_Id, ba.Book_Id });
+
+      //Création d'un index unique (sans doublon)
+      modelBuilder.Entity<Book>().HasIndex(b => b.ISBN).IsUnique();
+
+      //Création d'un index composé, nom spécifié
+      modelBuilder.Entity<Book>().HasIndex(b => new { b.Title, b.PublishedDate }).HasDatabaseName("Index_BookTitlePubDate");
     }
   }
 }

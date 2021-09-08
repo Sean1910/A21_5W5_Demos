@@ -18,8 +18,12 @@ namespace CrazyBook_Models
     [MaxLength(15)]
     public string ISBN { get; set; }
     [Required]
+    [Column(TypeName = "decimal(10,2)")]
+    [DisplayFormat(DataFormatString = "{0:c2}")] // Monetaire (currency)
     public double Price { get; set; }
-
+    [DataType(DataType.Date)] //Mettre aussi le type de input
+    public DateTime PublishedDate { get; set; }
+   
     // Relation 1 à plusieurs, obligatoire
     [ForeignKey("Publisher")]
     public int Publisher_Id { get; set; }
