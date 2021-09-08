@@ -24,5 +24,11 @@ namespace CrazyBook_Models
 
     //Propriété de navigation 1 à plusieurs, côté plusieurs
     public ICollection<AuthorBook> AuthorsBooks { get; set; }
+
+    // Relation 1 à plusieurs récursive
+    [InverseProperty("Mentor")]
+    public int? MentorId { get; set; }
+    //Propriété de navigation 1 à plusieurs récursive (sur elle-même)
+    public Author Mentor { get; set; }
   }
 }
