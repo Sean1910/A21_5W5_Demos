@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrazyBook", "Publisher\CrazyBook.csproj", "{F65A75F1-2522-422B-B36C-D5E60C1831DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiBooks", "MultiBooks\MultiBooks.csproj", "{D4FF5BFD-C7FF-4C76-BA34-5F74EC761569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazyBook_Models", "CrazyBooks_Models\CrazyBook_Models.csproj", "{0A59864B-07DB-4991-92F5-93EA35BA46A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiBooks_DataAccess", "MultiBooks_DataAccess\MultiBooks_DataAccess.csproj", "{2FD52AA7-F741-4DA4-BA31-97F7F5DBE7D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazyBook_DataAccess", "CrazyBook_DataAccess\CrazyBook_DataAccess.csproj", "{15119FF1-778D-4F83-911A-CFE7487F0E37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiBooks_Models", "MultiBooks_Models\MultiBooks_Models.csproj", "{AC62C06D-3B4D-4B7D-8F9E-6CDB327982A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F65A75F1-2522-422B-B36C-D5E60C1831DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F65A75F1-2522-422B-B36C-D5E60C1831DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F65A75F1-2522-422B-B36C-D5E60C1831DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F65A75F1-2522-422B-B36C-D5E60C1831DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A59864B-07DB-4991-92F5-93EA35BA46A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A59864B-07DB-4991-92F5-93EA35BA46A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A59864B-07DB-4991-92F5-93EA35BA46A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A59864B-07DB-4991-92F5-93EA35BA46A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15119FF1-778D-4F83-911A-CFE7487F0E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15119FF1-778D-4F83-911A-CFE7487F0E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15119FF1-778D-4F83-911A-CFE7487F0E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15119FF1-778D-4F83-911A-CFE7487F0E37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4FF5BFD-C7FF-4C76-BA34-5F74EC761569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4FF5BFD-C7FF-4C76-BA34-5F74EC761569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4FF5BFD-C7FF-4C76-BA34-5F74EC761569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4FF5BFD-C7FF-4C76-BA34-5F74EC761569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FD52AA7-F741-4DA4-BA31-97F7F5DBE7D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD52AA7-F741-4DA4-BA31-97F7F5DBE7D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD52AA7-F741-4DA4-BA31-97F7F5DBE7D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FD52AA7-F741-4DA4-BA31-97F7F5DBE7D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC62C06D-3B4D-4B7D-8F9E-6CDB327982A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC62C06D-3B4D-4B7D-8F9E-6CDB327982A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC62C06D-3B4D-4B7D-8F9E-6CDB327982A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC62C06D-3B4D-4B7D-8F9E-6CDB327982A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
