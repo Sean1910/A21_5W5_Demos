@@ -10,6 +10,6 @@ namespace MultiBooks.Models.ViewModels
   {
     public Book Book { get; set; }
     public IEnumerable<SelectListItem> PublisherList { get; set; }
-
+    public IEnumerable<SelectListItem> SubjectList { get; set; }
   }
 }

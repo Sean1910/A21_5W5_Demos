@@ -24,6 +24,17 @@ a {
   border-color: #1861ac;
 }
 
+.DivBgForm {
+  /* background-image: url('../images/imagesLayout/BackgroundLivres.png');*/
+  background-color:lightgrey;
+    border-radius: 25px;
+}
+
+Div.form-group {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -61,6 +72,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+   background-image: url('../images/imagesLayout/BackgroundLivres.png');
 }
 .footer {
   position: absolute;

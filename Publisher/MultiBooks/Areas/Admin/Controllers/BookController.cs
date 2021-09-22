@@ -32,12 +32,19 @@ namespace MultiBooks.Areas.Admin.Controllers
 
     public IActionResult Create()
     {
-      BookVM obj = new BookVM();
-      obj.PublisherList = _db.Publisher.Select(i => new SelectListItem
+      BookVM obj = new BookVM()
+      {
+        PublisherList = _db.Publisher.Select(i => new SelectListItem
       {
         Text = i.Name,
         Value = i.Id.ToString()
-      });
+      }),
+        SubjectList = _db.Subject.Select(i => new SelectListItem
+        {
+          Text = i.Name,
+          Value = i.Id.ToString()
+        })
+      };
             
       return View(obj);
     }
@@ -49,6 +56,8 @@ namespace MultiBooks.Areas.Admin.Controllers
       if (ModelState.IsValid)
       {
         // Ajouter à la BD
+        _db.Add(book);
+        _db.SaveChanges();
       }
 
       return this.View(book);
@@ -56,14 +65,21 @@ namespace MultiBooks.Areas.Admin.Controllers
 
     public IActionResult Update(int? id)
     {
-      BookVM obj = new BookVM();
-      obj.PublisherList = _db.Publisher.Select(i => new SelectListItem
+      BookVM obj = new BookVM()
       {
-        Text = i.Name,
-        Value = i.Id.ToString()
-      });
-     
-       obj.Book = _db.Book.FirstOrDefault(u => u.Id == id);
+        PublisherList = _db.Publisher.Select(i => new SelectListItem
+        {
+          Text = i.Name,
+          Value = i.Id.ToString()
+        }),
+        SubjectList = _db.Subject.Select(i => new SelectListItem
+        {
+          Text = i.Name,
+          Value = i.Id.ToString()
+        })
+      };
+
+      obj.Book = _db.Book.FirstOrDefault(u => u.Id == id);
       if (obj == null)
       {
         return NotFound();

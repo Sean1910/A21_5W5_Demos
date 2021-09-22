@@ -32,6 +32,10 @@ namespace MultiBooks.Models
     //Propriété de navigation 1 à plusieurs, côté 1
     public Subject Subject { get; set; }
 
+    [Display(Name = "PublishedDate")]
+    [DataType(DataType.Date)] //Mettre aussi le type de input
+    public DateTime PublishedDate { get; set; }
+
     // Relation 1 à plusieurs, obligatoire
     [ForeignKey("Publisher")]
     public int Publisher_Id { get; set; }
