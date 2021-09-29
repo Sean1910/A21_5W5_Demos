@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MultiBooks_DataAccess.Repositoy.IRepository
 {
-  public interface IAuthorRepository:IRepository<Author>
+  public interface IAuthorRepository: IRepositoryAsync<Author>
   {
     void Update(Author author);
   }

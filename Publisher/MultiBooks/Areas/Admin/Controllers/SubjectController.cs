@@ -22,9 +22,9 @@ namespace MultiBooks.Controllers
       _unitOfWork = unitOfWork;
       _logger = logger;
     }
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-      IEnumerable<Subject> SubjectList = _unitOfWork.Subject.GetAll();
+      IEnumerable<Subject> SubjectList = await _unitOfWork.Subject.GetAllAsync();
 
       return View(SubjectList);
     }
@@ -37,17 +37,56 @@ namespace MultiBooks.Controllers
 
     //POST CREATE
     [HttpPost]
-    public IActionResult Create(Subject subject)
+    public async Task<IActionResult> Create(Subject subject)
     {
       if (ModelState.IsValid)
       {
         // Ajouter à la BD
-        _unitOfWork.Subject.Add(subject);
+      await  _unitOfWork.Subject.AddAsync(subject);
 
         _unitOfWork.Save();
         return RedirectToAction(nameof(Index));
       }
       return this.View(subject);
     }
+
+    // GET EDIT
+    public async Task<IActionResult> Edit(int id)
+    {
+      Subject subject = new Subject();
+
+      subject = await _unitOfWork.Subject.GetFirstOrDefaultAsync(s => s.Id == id);
+      if (subject == null)
+      {
+        return NotFound();
+      }
+      return View(subject);
+    }
+
+    // POST EDIT
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(Subject subject)
+    {
+      if (ModelState.IsValid)
+      {
+        _unitOfWork.Subject.Update(subject);
+      
+        _unitOfWork.Save();
+        return RedirectToAction(nameof(Index));
+      }
+      return View(subject);
+    }
+
+    // DELETE
+    public async Task<IActionResult> Delete(int id)
+    {
+      var objFromDb =await _unitOfWork.Subject.GetFirstOrDefaultAsync(u => u.Id == id);
+      await _unitOfWork.Subject.RemoveAsync(objFromDb);
+      _unitOfWork.Save();
+      return RedirectToAction(nameof(Index));
+    }
+
   }
 }
+

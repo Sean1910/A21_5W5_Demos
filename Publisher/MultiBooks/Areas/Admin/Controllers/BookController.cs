@@ -24,25 +24,29 @@ namespace MultiBooks.Areas.Admin.Controllers
       _unitOfWork = unitOfWork;
       _logger = logger;
     }
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-      IEnumerable<Book> objList = _unitOfWork.Book.GetAll(includeProperties: "Publisher,Subject");
+      IEnumerable<Book> bookList = await _unitOfWork.Book.GetAllAsync(includeProperties: "Publisher,Subject");
 
-      return View(objList);
+      return View(bookList);
     }
 
     //GET CREATE
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
+      IEnumerable<Subject> SubList = await _unitOfWork.Subject.GetAllAsync();
+
+      IEnumerable<Publisher> PubList = await _unitOfWork.Publisher.GetAllAsync();
+
       BookVM bookVM = new BookVM()
       {
         Book = new Book(),
-        SubjectList = _unitOfWork.Subject.GetAll().Select(i => new SelectListItem
+        SubjectList = SubList.Select(i => new SelectListItem
         {
           Text = i.Name,
           Value = i.Id.ToString()
         }),
-        PublisherList = _unitOfWork.Publisher.GetAll().Select(i => new SelectListItem
+        PublisherList = PubList.Select(i => new SelectListItem
         {
           Text = i.Name,
           Value = i.Id.ToString()
@@ -54,16 +58,65 @@ namespace MultiBooks.Areas.Admin.Controllers
     //POST CREATE
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(BookVM bookVM)
+    public async Task<IActionResult> Create(BookVM bookVM)
     {
       if (ModelState.IsValid)
       {
         // Ajouter à la BD
-        _unitOfWork.Book.Add(bookVM.Book);
+        await _unitOfWork.Book.AddAsync(bookVM.Book);
       }
 
       _unitOfWork.Save();
       return RedirectToAction(nameof(Index));
     }
+
+    // GET EDIT
+    public async Task<IActionResult> Update(int id)
+    {
+      IEnumerable<Subject> SubList = await _unitOfWork.Subject.GetAllAsync();
+
+      IEnumerable<Publisher> PubList = await _unitOfWork.Publisher.GetAllAsync();
+
+      BookVM bookVM = new BookVM()
+      {
+        Book = new Book(),
+        SubjectList = SubList.Select(i => new SelectListItem
+        {
+          Text = i.Name,
+          Value = i.Id.ToString()
+        }),
+        PublisherList = PubList.Select(i => new SelectListItem
+        {
+          Text = i.Name,
+          Value = i.Id.ToString()
+        })
+      };
+      bookVM.Book = await _unitOfWork.Book.GetFirstOrDefaultAsync(b => b.Id == id);
+      if (bookVM == null)
+      {
+        return NotFound();
+      }
+      return View(bookVM);
+    }
+
+    // POST EDIT
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Update(BookVM bookVM)
+    {
+      if (bookVM.Book.Id == 0)
+      {
+        //this is create
+        await _unitOfWork.Book.AddAsync(bookVM.Book);
+      }
+      else
+      {
+        //this is an update
+        _unitOfWork.Book.Update(bookVM.Book);
+      }
+      _unitOfWork.Save();
+      return RedirectToAction(nameof(Index));
+    }
+
   }
 }

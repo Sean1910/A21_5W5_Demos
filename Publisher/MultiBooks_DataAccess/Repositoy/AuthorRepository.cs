@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MultiBooks_DataAccess.Repositoy
 {
-  public class AuthorRepository : Repository<Author>, IAuthorRepository
+  public class AuthorRepository : RepositoryAsync<Author>, IAuthorRepository
   {
     private readonly MultiBooksDbContext _db;
 
