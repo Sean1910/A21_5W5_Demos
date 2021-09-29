@@ -118,5 +118,17 @@ namespace MultiBooks.Areas.Admin.Controllers
       return RedirectToAction(nameof(Index));
     }
 
+    [HttpPost]
+    public IActionResult ManageAuthors(AuthorsBooksVM authorsBooksVM)
+    {
+      if (authorsBooksVM.AuthorBook.Book_Id != 0 && authorsBooksVM.AuthorBook.Author_Id != 0)
+      {
+        _unitOfWork.AuthorBook.AddAsync(authorsBooksVM.AuthorBook);
+        _unitOfWork.Save();
+      }
+      return RedirectToAction(nameof(ManageAuthors), new { @id = authorsBooksVM.AuthorBook.Book_Id });
+    }
+
+
   }
 }

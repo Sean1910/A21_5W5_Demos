@@ -16,6 +16,15 @@ namespace MultiBooks_Models
     [Required]
     public string LastName { get; set; }
 
+    [NotMapped]
+    public string FullName
+    {
+      get
+      {
+        return $"{FirstName} {LastName}";
+      }
+    }
+
     // Relation 1 à 1 facultative
     [ForeignKey("AuthorDetail")]
     public int? AuthorDetail_Id { get; set; }
