@@ -17,6 +17,9 @@ namespace MultiBooks_Models
     [Required]
     public string Speciality { get; set; }
 
+    [DataType(DataType.Url)] //Mettre aussi type input URL
+    public string PublisherSite { get; set; }
+
     //Propriété de navigation 1 à plusieurs, côté plusieurs
     public List<Book> Books { get; set; }
   }
