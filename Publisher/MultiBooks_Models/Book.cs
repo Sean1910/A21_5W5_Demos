@@ -23,7 +23,9 @@ namespace MultiBooks_Models
     public double Price { get; set; }
     [DataType(DataType.Date)] //Mettre aussi le type de input
     public DateTime PublishedDate { get; set; }
-   
+
+    public bool Available { get; set; } = true;
+
     // Relation 1 à plusieurs, obligatoire
     [ForeignKey("Publisher")]
     public int Publisher_Id { get; set; }

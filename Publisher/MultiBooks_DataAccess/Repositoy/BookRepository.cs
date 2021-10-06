@@ -1,9 +1,11 @@
-﻿using MultiBooks_DataAccess.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MultiBooks_DataAccess.Data;
 using MultiBooks_DataAccess.Repositoy.IRepository;
 using MultiBooks_Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,5 +24,11 @@ namespace MultiBooks_DataAccess.Repositoy
     {
       _db.Update(book);
     }
+
+    public async Task<IEnumerable<Book>> GetAllAvailableAsync()
+    {
+      return await base.GetAllAsync(filter: b => b.Available == true,  includeProperties: "Publisher,Subject");
+    }
+
   }
 }

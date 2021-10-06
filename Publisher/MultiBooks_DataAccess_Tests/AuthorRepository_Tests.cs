@@ -9,7 +9,7 @@ namespace MultiBooks_DataAccess_Tests
   public class Tests
   {
    
-    private DbContextOptions<MultiBooksDbContext> options;
+    //private DbContextOptions<MultiBooksDbContext> options;
     [SetUp]
     public void Setup()
     {

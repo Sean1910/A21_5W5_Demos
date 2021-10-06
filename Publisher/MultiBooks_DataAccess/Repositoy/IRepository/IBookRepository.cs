@@ -10,5 +10,6 @@ namespace MultiBooks_DataAccess.Repositoy.IRepository
   public interface IBookRepository:IRepositoryAsync<Book>
   {
     void Update(Book book);
+    Task<IEnumerable<Book>> GetAllAvailableAsync();
   }
 }
