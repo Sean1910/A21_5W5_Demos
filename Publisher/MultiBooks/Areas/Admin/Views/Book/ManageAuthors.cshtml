@@ -18,7 +18,7 @@
                     <label asp-for="AuthorBook.Author.FullName"></label>
                 </div>
                 <div class="col-8">
-                    @Html.DropDownListFor(u => u.AuthorBook.Author_Id, Model.AuthorList, "--Select Author--",
+                    @Html.DropDownListFor(u => u.AuthorBook.Author_Id, Model.AuthorList, "--Select an Author--",
                         new { @class = "form-control" })
                 </div>
                 <div class="col-4 offset-4">

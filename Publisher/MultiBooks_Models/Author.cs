@@ -21,7 +21,7 @@ namespace MultiBooks_Models
     {
       get
       {
-        return $"{FirstName} {LastName}";
+        return $"{LastName}, {FirstName}";
       }
     }
 
