@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MultiBooks_DataAccess.Data
 {
-  public class MultiBooksDbContext:DbContext
+  public class MultiBooksDbContext:IdentityDbContext
   {
     public MultiBooksDbContext(DbContextOptions<MultiBooksDbContext> options) : base(options)
     {
@@ -31,6 +32,7 @@ namespace MultiBooks_DataAccess.Data
 
       //Création d'un index composé, nom spécifié
       modelBuilder.Entity<Book>().HasIndex(b => new { b.Title, b.PublishedDate }).HasDatabaseName("Index_BookTitlePubDate");
+      base.OnModelCreating(modelBuilder);
     }
   }
 }

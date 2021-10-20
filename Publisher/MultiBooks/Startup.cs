@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MultiBooks_DataAccess.Repositoy;
 using MultiBooks_DataAccess.Repositoy.IRepository;
+using Microsoft.AspNetCore.Identity;
 
 namespace MultiBooks
 {
@@ -31,6 +32,11 @@ namespace MultiBooks
                options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection")
                    ));
+
+      // Injecter le service pour Identity
+      services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders().AddDefaultUI()
+            .AddEntityFrameworkStores<MultiBooksDbContext>();
 
       services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -55,10 +61,14 @@ namespace MultiBooks
 
       app.UseRouting();
 
+      // Mettre l'authentification AVANT l'authorization
+      app.UseAuthentication();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>
       {
+        // Ajouter le routing pour les pages Razor d'Identity
+        endpoints.MapRazorPages();
         endpoints.MapControllerRoute(
                     name: "Customer",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");

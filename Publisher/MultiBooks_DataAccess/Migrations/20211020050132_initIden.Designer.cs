@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MultiBooks_DataAccess.Data;
 
 namespace MultiBooks_DataAccess.Migrations
 {
     [DbContext(typeof(MultiBooksDbContext))]
-    partial class MultiBooksDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211020050132_initIden")]
+    partial class initIden
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
