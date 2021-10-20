@@ -49,8 +49,16 @@ namespace MultiBooks.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
-
+          //Ajouter personnalisé
             [Required]
+            [Display(Name = "NickName")]
+            public string NickName { get; set; }
+          //Ajouter dans la table par défaut
+            [Required]
+            [Display(Name = "PhoneNumber")]
+            public string PhoneNumber { get; set; }
+
+      [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]

@@ -34,8 +34,7 @@ namespace MultiBooks
                    ));
 
       // Injecter le service pour Identity
-      services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddDefaultTokenProviders().AddDefaultUI()
+      services.AddDefaultIdentity<IdentityUser>()
             .AddEntityFrameworkStores<MultiBooksDbContext>();
 
       services.AddScoped<IUnitOfWork, UnitOfWork>();

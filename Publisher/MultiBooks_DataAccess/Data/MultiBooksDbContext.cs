@@ -19,6 +19,7 @@ namespace MultiBooks_DataAccess.Data
     public DbSet<Publisher> Publisher { get; set; }
     public DbSet<AuthorBook> AuthorBook { get; set; }
     public DbSet<Subject> Subject { get; set; }
+    public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

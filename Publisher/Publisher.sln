@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiBooks_DataAccess", "Mu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiBooks_Models", "MultiBooks_Models\MultiBooks_Models.csproj", "{AC62C06D-3B4D-4B7D-8F9E-6CDB327982A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiBooks_DataAccess_Tests", "MultiBooks_DataAccess_Tests\MultiBooks_DataAccess_Tests.csproj", "{6D0B83F5-D6E7-4541-A949-5ACC4C8C06E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiBooks_DataAccess_Tests", "MultiBooks_DataAccess_Tests\MultiBooks_DataAccess_Tests.csproj", "{6D0B83F5-D6E7-4541-A949-5ACC4C8C06E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{AFBEE508-9A82-4BE5-8EA9-CFF5E4F58593}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6D0B83F5-D6E7-4541-A949-5ACC4C8C06E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D0B83F5-D6E7-4541-A949-5ACC4C8C06E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D0B83F5-D6E7-4541-A949-5ACC4C8C06E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFBEE508-9A82-4BE5-8EA9-CFF5E4F58593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFBEE508-9A82-4BE5-8EA9-CFF5E4F58593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFBEE508-9A82-4BE5-8EA9-CFF5E4F58593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFBEE508-9A82-4BE5-8EA9-CFF5E4F58593}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
