@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MultiBooks_DataAccess.Data;
 
 namespace MultiBooks_DataAccess.Migrations
 {
     [DbContext(typeof(MultiBooksDbContext))]
-    partial class MultiBooksDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211026214017_AddResume")]
+    partial class AddResume
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -293,10 +295,6 @@ namespace MultiBooks_DataAccess.Migrations
 
                     b.Property<bool>("Available")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Cover")
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("ISBN")
                         .IsRequired()
