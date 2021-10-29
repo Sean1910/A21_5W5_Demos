@@ -51,7 +51,7 @@
               <a class="btn btn-danger mx-2" asp-action="Delete" asp-route-Id="@item.Id">
                 Delete
               </a>
-              <a class="btn btn-success text-white" asp-action="ManageAuthors" asp-route-Id="@item.Id">
+              <a class="btn btn-success text-white" asp-controller="Book" asp-action="ManageAuthors" asp-route-Id="@item.Id">
                 Authors
               </a>
             </div>

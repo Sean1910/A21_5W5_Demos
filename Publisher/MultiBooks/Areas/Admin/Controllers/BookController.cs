@@ -82,7 +82,7 @@ namespace MultiBooks.Areas.Admin.Controllers
         var files = HttpContext.Request.Form.Files; //nouveau fichier récupéré
         string webRootPath = _webHostEnvironment.WebRootPath; //Chemin jusqu'au Root (pour les fichiers)
 
-        // Update
+        //Update ou insert
         if (bookVM.Book.Id == 0)
         {
           //Insert  
@@ -141,14 +141,41 @@ namespace MultiBooks.Areas.Admin.Controllers
       return View(bookVM);
     }
 
+    //GET ManageAuthors
+    public async Task<IActionResult> ManageAuthors(int id)
+    {
+      AuthorsBooksVM obj = new AuthorsBooksVM
+      {
+        AuthorBookList = await _unitOfWork.AuthorBook.GetAllAsync(includeProperties: "Author,Book"),
+        AuthorBook = new AuthorBook()
+        {
+          Book_Id = id
+        },
+        Book = await _unitOfWork.Book.GetFirstOrDefaultAsync(b => b.Id == id)
+      };
+      List<int> tempListOfAssignedAuthors = obj.AuthorBookList.Select(u => u.Author_Id).ToList();
+      //NOT IN Clause in LINQ
+      //get all the authors whos id is not in tempListOfAssignedAuthors
+      var tempList = _unitOfWork.Author.GetAllAsync(filter:a => !tempListOfAssignedAuthors.Contains(a.Id));
 
-  
+      obj.AuthorList = tempList.Select(i => new SelectListItem
+      {
+        Text = i.FullName,
+        Value = i.Id.ToString()
+      });
+
+      return View(obj);
+
+    }
+
+
+    //POST ManageAuthors
     [HttpPost]
-    public IActionResult ManageAuthors(AuthorsBooksVM authorsBooksVM)
+    public async Task<IActionResult> ManageAuthors(AuthorsBooksVM authorsBooksVM)
     {
       if (authorsBooksVM.AuthorBook.Book_Id != 0 && authorsBooksVM.AuthorBook.Author_Id != 0)
       {
-        _unitOfWork.AuthorBook.AddAsync(authorsBooksVM.AuthorBook);
+       await _unitOfWork.AuthorBook.AddAsync(authorsBooksVM.AuthorBook);
         _unitOfWork.Save();
       }
       return RedirectToAction(nameof(ManageAuthors), new { @id = authorsBooksVM.AuthorBook.Book_Id });
