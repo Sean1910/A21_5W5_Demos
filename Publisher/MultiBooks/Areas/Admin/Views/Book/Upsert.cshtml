@@ -19,6 +19,17 @@
     </div>
     <div class="row">
       <div class="col-7">
+
+        <div class="form-group row">
+
+          <div class="col-2">
+            <label asp-for="Book.Available"></label>
+          </div>
+          <div class="col-8">
+            <input type="checkbox" asp-for="Book.Available" class="form-check-input" />
+          </div>
+        </div>
+
         <div class="form-group row">
           <div class="col-2">
             <label asp-for="Book.Title"></label>
@@ -60,32 +71,11 @@
         </div>
 
         <div class="form-group row">
-
-          <div class="col-2">
-              <label asp-for="Book.Available"></label>
-            </div>
-            <div class="col-8">
-              <input type="checkbox" asp-for="Book.Available" class="form-control" />
-            </div>
-          </div>
-
-        <div class="form-group row">
-          <div class="col-2">
-            Publisher
-          </div>
-          <div class="col-8">
-            @Html.DropDownListFor(p => p.Book.Publisher_Id, Model.PublisherList, "-Select a Publisher",
-           new { @class = "form-control" })
-            <span asp-validation-for="Book.Publisher_Id" class="text-danger"></span>
-          </div>
-        </div>
-
-        <div class="form-group row">
           <div class="col-2">
             Subject
           </div>
           <div class="col-8">
-            @Html.DropDownListFor(s => s.Book.Subject_Id, Model.SubjectList, "-Select a Subject",
+            @Html.DropDownListFor(s => s.Book.Subject_Id, Model.SubjectList.OrderBy(s => s.Text), "-Select a Subject",
            new { @class = "form-control" })
             <span asp-validation-for="Book.Subject_Id" class="text-danger"></span>
           </div>
@@ -105,33 +95,35 @@
             <label asp-for="Book.Resume"></label>
           </div>
           <div class="col-8">
-            <input asp-for="Book.Resume" class="form-control" />
+            <input asp-for="Book.Resume" class="form-control summernote" />
             <span asp-validation-for="Book.Resume" class="text-danger"></span>
           </div>
         </div>
 
-        <div class="form-group row">
-          <div class="col-8 offset-2">
-            <div class="row">
-              <div class="col">
-                @if (Model.Book.Id != 0)
-                {
-                  <input type="submit" class="btn btn-info w-100" value="Edit" />
-                }
-                else
-                {
-                  <input type="submit" class="btn btn-info w-100" value="Create" />
-                }
+        <div class="col-5">
+          <div class="form-group row">
+            <div class="col-8 offset-2">
+              <div class="row">
+                <div class="col">
+                  @if (Model.Book.Id != 0)
+                  {
+                    <input type="submit" class="btn btn-info w-100" model="Model.Book.Id" value="Edit" />
+                  }
+                  else
+                  {
+                    <input type="submit" class="btn btn-info w-100" value="Create" />
+                  }
 
-              </div>
-              <div class="col">
-                <a asp-action="Index" class="btn btn-success w-100">Back to list</a>
+                </div>
+                <div class="col">
+                  <a asp-action="Index" class="btn btn-success w-100">Back to list</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-5">
+
+        <div class="col-5">
           <div class="form-group row">
             @if (Model.Book.Id != 0)
             {
@@ -144,15 +136,19 @@
                 <div style="width:350px;height:450px;border-radius:5px; border:1px solid #bbb9b9"></div>
               </div>}
           </div>
+        </div>
 
-          
       </div>
     </div>
-</form>
+  </form>
 </div>
 
 @section Scripts{
-  @{
-    <partial name="_ValidationScriptsPartial" />
-  }
+  <partial name="_ValidationScriptsPartial" />
+  <script>
+    $('.summernote').summernote({
+      height: 300
+    });
+  </script>
+
 }

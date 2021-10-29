@@ -27,4 +27,8 @@
     <ProjectReference Include="..\MultiBooks_Utility\MultiBooks_Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Books\" />
+  </ItemGroup>
+
 </Project>
