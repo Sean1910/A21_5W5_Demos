@@ -26,6 +26,17 @@ a.navbar-brand {
 
 /* Sticky footer styles
 -------------------------------------------------- */
+.DivBgForm {
+  /* background-image: url('../images/imagesLayout/BackgroundLivres.png');*/
+  background-color: darkgray;
+  border-radius: 25px;
+}
+
+Div.form-group {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
 html {
   font-size: 14px;
 }

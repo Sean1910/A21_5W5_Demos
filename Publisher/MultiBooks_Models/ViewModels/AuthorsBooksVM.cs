@@ -11,7 +11,7 @@ namespace MultiBooks_Models.ViewModels
   {
     public AuthorBook AuthorBook { get; set; }
     public Book Book { get; set; }
-    public IEnumerable<AuthorBook> BookAuthorList { get; set; }
+    public IEnumerable<AuthorBook> AuthorBookList { get; set; }
     public IEnumerable<SelectListItem> AuthorList { get; set; }
   }
 }
