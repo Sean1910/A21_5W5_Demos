@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MultiBooks_DataAccess.Migrations
 {
-    public partial class init : Migration
+    public partial class Seed1Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,6 +26,8 @@ namespace MultiBooks_DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NickName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -233,6 +235,8 @@ namespace MultiBooks_DataAccess.Migrations
                     Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     PublishedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Available = table.Column<bool>(type: "bit", nullable: false),
+                    Resume = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cover = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
                     Publisher_Id = table.Column<int>(type: "int", nullable: false),
                     Subject_Id = table.Column<int>(type: "int", nullable: false)
                 },
@@ -258,7 +262,8 @@ namespace MultiBooks_DataAccess.Migrations
                 columns: table => new
                 {
                     Book_Id = table.Column<int>(type: "int", nullable: false),
-                    Author_Id = table.Column<int>(type: "int", nullable: false)
+                    Author_Id = table.Column<int>(type: "int", nullable: false),
+                    PCRoyalties = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -276,6 +281,42 @@ namespace MultiBooks_DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Publisher",
+                columns: new[] { "Id", "Name", "PublisherSite", "Speciality" },
+                values: new object[,]
+                {
+                    { 1, "J'ai lu", "", "Romance, Policier" },
+                    { 2, "Chenelière", "", "Collégial et universitaire" },
+                    { 3, "Éditions ADA", "www.ada-inc.com/", "jeunesse, mystère" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Subject",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Romance" },
+                    { 2, "Ressources humaines" },
+                    { 3, "Mystère" },
+                    { 4, "Aventure" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Book",
+                columns: new[] { "Id", "Available", "Cover", "ISBN", "Price", "PublishedDate", "Publisher_Id", "Resume", "Subject_Id", "Title" },
+                values: new object[] { 1, true, null, "9782765053200", 22.95m, new DateTime(2015, 10, 4, 13, 12, 0, 0, DateTimeKind.Unspecified), 2, "La quatrième édition de cet ouvrage de référence propose un éclairage nouveau sur la gestion des ressources humaines en présentant l’une de ses variantes aujourd’hui incontournable : la gestion des talents. Vous y retrouverez les grands thèmes de la GRH, étudiés à travers les stratégies à appliquer dans le contexte actuel de nombreuses entreprises.", 2, "De la supervision à la gestion" });
+
+            migrationBuilder.InsertData(
+                table: "Book",
+                columns: new[] { "Id", "Available", "Cover", "ISBN", "Price", "PublishedDate", "Publisher_Id", "Resume", "Subject_Id", "Title" },
+                values: new object[] { 2, true, null, "9782898083662", 16.95m, new DateTime(2019, 11, 6, 13, 12, 0, 0, DateTimeKind.Unspecified), 3, "", 4, "Amos Daragon LA COLERE D’ENKI" });
+
+            migrationBuilder.InsertData(
+                table: "Book",
+                columns: new[] { "Id", "Available", "Cover", "ISBN", "Price", "PublishedDate", "Publisher_Id", "Resume", "Subject_Id", "Title" },
+                values: new object[] { 3, true, null, "9782898083693", 16.95m, new DateTime(2020, 11, 6, 13, 12, 0, 0, DateTimeKind.Unspecified), 3, "", 4, "Amos Daragon LA TOUR D’EL-BAB" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

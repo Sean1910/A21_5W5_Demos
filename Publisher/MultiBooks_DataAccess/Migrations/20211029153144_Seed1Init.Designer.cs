@@ -10,8 +10,8 @@ using MultiBooks_DataAccess.Data;
 namespace MultiBooks_DataAccess.Migrations
 {
     [DbContext(typeof(MultiBooksDbContext))]
-    [Migration("20211020152434_init2")]
-    partial class init2
+    [Migration("20211029153144_Seed1Init")]
+    partial class Seed1Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -267,6 +267,9 @@ namespace MultiBooks_DataAccess.Migrations
                     b.Property<int>("Book_Id")
                         .HasColumnType("int");
 
+                    b.Property<int>("PCRoyalties")
+                        .HasColumnType("int");
+
                     b.HasKey("Author_Id", "Book_Id");
 
                     b.HasIndex("Book_Id");
@@ -303,6 +306,10 @@ namespace MultiBooks_DataAccess.Migrations
                     b.Property<bool>("Available")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Cover")
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
                     b.Property<string>("ISBN")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -316,6 +323,9 @@ namespace MultiBooks_DataAccess.Migrations
 
                     b.Property<int>("Publisher_Id")
                         .HasColumnType("int");
+
+                    b.Property<string>("Resume")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Subject_Id")
                         .HasColumnType("int");
@@ -338,6 +348,44 @@ namespace MultiBooks_DataAccess.Migrations
                         .HasDatabaseName("Index_BookTitlePubDate");
 
                     b.ToTable("Book");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Available = true,
+                            ISBN = "9782765053200",
+                            Price = 22.95m,
+                            PublishedDate = new DateTime(2015, 10, 4, 13, 12, 0, 0, DateTimeKind.Unspecified),
+                            Publisher_Id = 2,
+                            Resume = "La quatrième édition de cet ouvrage de référence propose un éclairage nouveau sur la gestion des ressources humaines en présentant l’une de ses variantes aujourd’hui incontournable : la gestion des talents. Vous y retrouverez les grands thèmes de la GRH, étudiés à travers les stratégies à appliquer dans le contexte actuel de nombreuses entreprises.",
+                            Subject_Id = 2,
+                            Title = "De la supervision à la gestion"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Available = true,
+                            ISBN = "9782898083662",
+                            Price = 16.95m,
+                            PublishedDate = new DateTime(2019, 11, 6, 13, 12, 0, 0, DateTimeKind.Unspecified),
+                            Publisher_Id = 3,
+                            Resume = "",
+                            Subject_Id = 4,
+                            Title = "Amos Daragon LA COLERE D’ENKI"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Available = true,
+                            ISBN = "9782898083693",
+                            Price = 16.95m,
+                            PublishedDate = new DateTime(2020, 11, 6, 13, 12, 0, 0, DateTimeKind.Unspecified),
+                            Publisher_Id = 3,
+                            Resume = "",
+                            Subject_Id = 4,
+                            Title = "Amos Daragon LA TOUR D’EL-BAB"
+                        });
                 });
 
             modelBuilder.Entity("MultiBooks_Models.Publisher", b =>
@@ -361,6 +409,29 @@ namespace MultiBooks_DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Publisher");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "J'ai lu",
+                            PublisherSite = "",
+                            Speciality = "Romance, Policier"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Chenelière",
+                            PublisherSite = "",
+                            Speciality = "Collégial et universitaire"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Éditions ADA",
+                            PublisherSite = "www.ada-inc.com/",
+                            Speciality = "jeunesse, mystère"
+                        });
                 });
 
             modelBuilder.Entity("MultiBooks_Models.Subject", b =>
@@ -377,13 +448,35 @@ namespace MultiBooks_DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Subject");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Romance"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Ressources humaines"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Mystère"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Aventure"
+                        });
                 });
 
             modelBuilder.Entity("MultiBooks_Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("MyNickName")
+                    b.Property<string>("NickName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");

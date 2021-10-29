@@ -33,7 +33,15 @@ namespace MultiBooks_DataAccess.Data
 
       //Création d'un index composé, nom spécifié
       modelBuilder.Entity<Book>().HasIndex(b => new { b.Title, b.PublishedDate }).HasDatabaseName("Index_BookTitlePubDate");
+
+     //Générer des données de départ
+      modelBuilder.GenerateData();
+
+
+
+
       base.OnModelCreating(modelBuilder);
+
     }
   }
 }

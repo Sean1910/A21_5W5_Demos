@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Author\Views\" />
+    <Compile Remove="Areas\Author\**" />
+    <Content Remove="Areas\Author\**" />
+    <EmbeddedResource Remove="Areas\Author\**" />
+    <None Remove="Areas\Author\**" />
   </ItemGroup>
 
   <ItemGroup>
