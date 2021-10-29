@@ -40,7 +40,6 @@ namespace MultiBooks.Areas.Admin.Controllers
     public async Task<IActionResult> Upsert(int? id)
     {
       IEnumerable<Subject> SubList = await _unitOfWork.Subject.GetAllAsync();
-
       IEnumerable<Publisher> PubList = await _unitOfWork.Publisher.GetAllAsync();
 
       BookVM bookVM = new BookVM()
@@ -50,20 +49,19 @@ namespace MultiBooks.Areas.Admin.Controllers
         {
           Text = i.Name,
           Value = i.Id.ToString()
-        }),
+        }).OrderBy(p => p.Text),
         PublisherList = PubList.Select(i => new SelectListItem
         {
           Text = i.Name,
           Value = i.Id.ToString()
-        })
+        }).OrderBy(s => s.Text)
       };
       if (id == null)
       {
         //CREATE
         return View(bookVM);
       }
-      else
-      {
+     
         //EDIT
         bookVM.Book = await _unitOfWork.Book.GetFirstOrDefaultAsync(b => b.Id == id);
         if (bookVM == null)
@@ -71,9 +69,8 @@ namespace MultiBooks.Areas.Admin.Controllers
           return NotFound();
         }
         return View(bookVM);
-
-      }
     }
+
 
     //POST UPSERT
     [HttpPost]
@@ -82,8 +79,8 @@ namespace MultiBooks.Areas.Admin.Controllers
     {
       if (ModelState.IsValid)//validation côté serveur
       {
-        var files = HttpContext.Request.Form.Files; //nouvelle image récupérée
-        string webRootPath = _webHostEnvironment.WebRootPath; //Chemin des images zombies
+        var files = HttpContext.Request.Form.Files; //nouveau fichier récupéré
+        string webRootPath = _webHostEnvironment.WebRootPath; //Chemin jusqu'au Root (pour les fichiers)
 
         // Update
         if (bookVM.Book.Id == 0)
