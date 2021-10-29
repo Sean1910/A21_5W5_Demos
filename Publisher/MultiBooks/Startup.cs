@@ -39,6 +39,13 @@ namespace MultiBooks
 
       services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+      //Authentification Facebook
+      services.AddAuthentication().AddFacebook(Options =>
+      {
+        Options.AppId = "460923792024887";
+        Options.AppSecret = "73f024b6c5b3ea9ebacf810f08cf6d30";
+      });
+
       services.AddControllersWithViews().AddRazorRuntimeCompilation();
     }
 
