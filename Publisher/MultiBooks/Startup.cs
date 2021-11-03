@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using MultiBooks_DataAccess.Repositoy;
 using MultiBooks_DataAccess.Repositoy.IRepository;
 using Microsoft.AspNetCore.Identity;
+using MultiBooks_DataAccess.Initializer;
 
 namespace MultiBooks
 {
@@ -34,10 +35,14 @@ namespace MultiBooks
                    ));
 
       // Injecter le service pour Identity
-      services.AddDefaultIdentity<IdentityUser>()
-            .AddEntityFrameworkStores<MultiBooksDbContext>();
+      //services.AddDefaultIdentity<IdentityUser>()
+      //      .AddEntityFrameworkStores<MultiBooksDbContext>();
+      services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<MultiBooksDbContext>();
 
       services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+      services.AddScoped<IDbInitializer, DbInitializer>();
 
       //Authentification Facebook
       services.AddAuthentication().AddFacebook(Options =>
