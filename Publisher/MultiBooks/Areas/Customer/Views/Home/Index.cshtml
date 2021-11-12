@@ -45,24 +45,19 @@
             <td width="17%">@item.Publisher.Name</td>
             <td width="18%">@item.Publisher.Speciality</td>
             <td width="20%">
-              @{ var authors = ""; }
+              @*@{ var authors = ""; }
               @foreach (var auth in item.AuthorsBooks)
               {
                 authors += @auth.Author.FullName + ", ";
               }
-              @authors.Trim().TrimEnd(',')
+              @authors.Trim().TrimEnd(',')*@
             </td>
             <td width="20%" class="text-center">
               <div class="w-75 btn-group" role="group">
-                <a class="btn btn-warning mx-2" asp-action="Update" asp-route-Id="@item.Id">
-                  Edit
+                <a class="btn btn-warning mx-2" asp-action="Detail" asp-route-Id="@item.Id">
+                  Details
                 </a>
-                <a class="btn btn-danger mx-2" asp-action="Delete" asp-route-Id="@item.Id">
-                  Delete
-                </a>
-                <a class="btn btn-success text-white" asp-action="ManageAuthors" asp-route-Id="@item.Id">
-                  Authors
-                </a>
+              
               </div>
             </td>
           </tr>

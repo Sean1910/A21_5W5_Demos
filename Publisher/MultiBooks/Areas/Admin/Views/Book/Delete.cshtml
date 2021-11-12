@@ -1,0 +1,79 @@
+﻿@model MultiBooks_Models.Book
+<div class="border p-3 DivBgForm">
+  <form class="form-horizontal" method="post" asp-action="Delete">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group row">
+      <h2 class="text-info pl-3">Delete a Book</h2>
+      <hr />
+    </div>
+
+    <div class="col-8  pt-4">
+      <div class="form-group row p-2">
+        <div class="col-2">
+          <label asp-for="Title"></label>
+        </div>
+        <div class="col-8">
+          <input asp-for="Title" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group row p-2">
+        <div class="col-2">
+          <label asp-for="ISBN"></label>
+        </div>
+        <div class="col-8">
+          <input asp-for="ISBN" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group row p-2">
+        <div class="col-2">
+          <label asp-for="Price"></label>
+        </div>
+        <div class="col-8">
+          <input type="number" asp-for="Price" class="form-control text-right" />
+        </div>
+      </div>
+
+      <div class="form-group row p-2">
+        <div class="col-2">
+          <label asp-for="PublishedDate"></label>
+        </div>
+        <div class="col-8">
+          <input type="date" asp-for="PublishedDate" value="2021-01-01" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group row p-2">
+        <div class="col-2">
+          <label asp-for="@Model.Publisher.Name"></label>
+        </div>
+        <div class="col-8">
+          <input type="date" asp-for="@Model.Publisher.Name" value="2021-01-01" class="form-control" />
+        </div>
+      </div>
+
+      
+
+      <div class="form-group row p-2">
+        <div class="col-8 offset-2 row">
+          <div class="col">
+            <input type="submit" class="btn btn-info w-100" value="Delete" />
+          </div>
+          <div class="col">
+            <a asp-action="Index" class="btn btn-success w-100">Back to list</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+@section Scripts{
+  @{
+    <partial name="_ValidationScriptsPartial" />
+  }
+}

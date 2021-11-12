@@ -10,8 +10,8 @@ using MultiBooks_DataAccess.Data;
 namespace MultiBooks_DataAccess.Migrations
 {
     [DbContext(typeof(MultiBooksDbContext))]
-    [Migration("20211006154932_addBookAvailable")]
-    partial class addBookAvailable
+    [Migration("20211112163445_initS7")]
+    partial class initS7
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

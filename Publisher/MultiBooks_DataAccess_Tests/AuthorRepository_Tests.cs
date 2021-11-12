@@ -17,10 +17,11 @@ namespace MultiBooks_DataAccess_Tests
       //         .UseInMemoryDatabase(databaseName: "memory_MultiBooks").Options;
     }
 
-    [Test]
-    public void Test1()
-    {
-      Assert.Pass();
-    }
+    //[Test]
+    //public void Test1()
+    //{
+    //  Assert.Pass();
+    //}
+  
   }
 }

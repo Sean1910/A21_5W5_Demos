@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace MultiBooks_Models
     [DataType(DataType.Date)] //Mettre aussi le type de input
     public DateTime PublishedDate { get; set; }
 
+   
     public bool Available { get; set; } = true;
 
     // Relation 1 à plusieurs, obligatoire

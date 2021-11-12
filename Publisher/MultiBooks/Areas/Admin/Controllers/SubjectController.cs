@@ -17,10 +17,11 @@ namespace MultiBooks.Controllers
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<SubjectController> _logger;
 
-    public SubjectController(IUnitOfWork unitOfWork, ILogger<SubjectController> logger)
+   // public SubjectController(IUnitOfWork unitOfWork, ILogger<SubjectController> logger)
+      public SubjectController(IUnitOfWork unitOfWork)
     {
       _unitOfWork = unitOfWork;
-      _logger = logger;
+     // _logger = logger;
     }
     public async Task<IActionResult> Index()
     {

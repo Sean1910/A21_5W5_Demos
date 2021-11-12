@@ -30,5 +30,22 @@ namespace MultiBooks_DataAccess.Repositoy
       return await base.GetAllAsync(filter: b => b.Available == true,  includeProperties: "Publisher,Subject");
     }
 
+
+    // Pas de suppression réelle quand id est en paramètre
+    public override async Task RemoveAsync(int id)
+    {
+      var book = await GetAsync(id);
+      book.Available = false;
+      Update(book);
+    }
+
+
+    // Suppression réelle quand entity Book est en paramètre
+    // Pour l'instant répète la méthode originale
+    public override async Task RemoveAsync(Book entity)
+    {
+      dbSet.Remove(entity);
+    }
+
   }
 }

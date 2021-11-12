@@ -39,12 +39,12 @@
           <td width="17%">@item.Publisher.Name</td>
           <td width="18%">@item.Publisher.Speciality</td>
           <td width="20%">
-            @{ var authors = ""; }
+            @*@{ var authors = ""; }
             @foreach (var auth in item.AuthorsBooks)
             {
               authors += @auth.Author.FullName + ", ";
             }
-            @authors.Trim().TrimEnd(',')
+            @authors.Trim().TrimEnd(',')*@
           </td>
           <td width="20%" class="text-center">
             <div class="w-75 btn-group" role="group">

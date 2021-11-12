@@ -17,10 +17,11 @@ namespace MultiBooks.Areas.Publishers.Controllers
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<PublisherController> _logger;
 
-    public PublisherController(IUnitOfWork unitOfWork, ILogger<PublisherController> logger)
+    //public PublisherController(IUnitOfWork unitOfWork, ILogger<PublisherController> logger)
+    public PublisherController(IUnitOfWork unitOfWork)
     {
       _unitOfWork = unitOfWork;
-      _logger = logger;
+     // _logger = logger;
     }
 
     public async Task<IActionResult> Index()
@@ -28,6 +29,7 @@ namespace MultiBooks.Areas.Publishers.Controllers
       IEnumerable<Publisher> PublisherList = await _unitOfWork.Publisher.GetAllAsync();
 
       return View(PublisherList);
+
     }
 
     public async Task<IActionResult> Detail(int id)

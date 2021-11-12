@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MultiBooks_DataAccess.Migrations
 {
-    public partial class addBookAvailable : Migration
+    public partial class initS7 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
