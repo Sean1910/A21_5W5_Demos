@@ -17,11 +17,10 @@ namespace MultiBooks.Areas.Publishers.Controllers
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<PublisherController> _logger;
 
-    //public PublisherController(IUnitOfWork unitOfWork, ILogger<PublisherController> logger)
-    public PublisherController(IUnitOfWork unitOfWork)
+    public PublisherController(IUnitOfWork unitOfWork, ILogger<PublisherController> logger)
     {
       _unitOfWork = unitOfWork;
-     // _logger = logger;
+      _logger = logger;
     }
 
     public async Task<IActionResult> Index()
@@ -30,6 +29,50 @@ namespace MultiBooks.Areas.Publishers.Controllers
 
       return View(PublisherList);
 
+    }
+
+    //GET - UPSERT
+    public async Task<IActionResult> Upsert(int? id)
+    {
+      Publisher publisher = new Publisher();
+      if (id == null)
+      {
+        //CREATE
+        return View(publisher);
+      }
+      else
+      {
+        //EDIT
+        publisher = await _unitOfWork.Publisher.GetAsync(id.GetValueOrDefault());
+        if (publisher == null)
+        {
+          return NotFound();
+        }
+        return View(publisher);
+      }
+
+    }
+
+    //POST - UPSERT
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Upsert(Publisher publisher)
+    {
+      if (ModelState.IsValid)
+      {
+        if (publisher.Id == 0)
+        {
+          await _unitOfWork.Publisher.AddAsync(publisher);
+
+        }
+        else
+        {
+          _unitOfWork.Publisher.Update(publisher);
+        }
+        _unitOfWork.Save();
+        return RedirectToAction(nameof(Index));
+      }
+      return View(publisher);
     }
 
     public async Task<IActionResult> Detail(int id)
