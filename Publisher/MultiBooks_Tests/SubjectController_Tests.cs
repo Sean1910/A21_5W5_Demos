@@ -8,6 +8,7 @@ using MultiBooks_DataAccess.Repositoy.IRepository;
 using MultiBooks_Models;
 using NUnit.Framework;
 using System;
+using System.Threading.Tasks;
 
 namespace MultiBooks_Tests
 {
@@ -15,27 +16,28 @@ namespace MultiBooks_Tests
   public class SubjectController_Tests
   {
     private Mock<IUnitOfWork> _unitOfWork;
-    private Mock<ISubjectRepository> _repositorySubject;
-     private Mock<ILogger<SubjectController>> _logger;
     private SubjectController _subjectController;
 
     [SetUp]
     public void Setup()
     {
       _unitOfWork = new Mock<IUnitOfWork>();
-     // _logger = new Mock<ILogger<PublisherController>.Object>();
       _subjectController = new SubjectController(_unitOfWork.Object);
     }
 
     [Test]
     public void AddPublisher_ModelStateInvalid_ReturnView()
     {
-      _subjectController.ModelState.AddModelError("test", "test");
 
-      //var result = _subjectController.Create(new Subject());
+      _subjectController.ModelState.AddModelError("Invalid", "Invalid");
 
-      //ViewResult viewResult = result as ViewResult;
-      //Assert.AreEqual("Create", viewResult.ViewName);
+      var actionResultTask = _subjectController.Create(new Subject());
+      actionResultTask.Wait();
+      var viewResult = actionResultTask.Result as ViewResult;
+
+      // Assert
+      Assert.NotNull(viewResult);
+      Assert.AreEqual("Create", viewResult.ViewName);
     }
 
 
