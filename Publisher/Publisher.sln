@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiBooks_DataAccess_Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiBooks_Tests", "MultiBooks_Tests\MultiBooks_Tests.csproj", "{7B23CED7-87E0-412F-BFD7-E4A20255D456}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiBooks_Utility", "MultiBooks_Utility\MultiBooks_Utility.csproj", "{CE016921-E0AD-4D40-913A-AAC3A44E7EFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7B23CED7-87E0-412F-BFD7-E4A20255D456}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B23CED7-87E0-412F-BFD7-E4A20255D456}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B23CED7-87E0-412F-BFD7-E4A20255D456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE016921-E0AD-4D40-913A-AAC3A44E7EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE016921-E0AD-4D40-913A-AAC3A44E7EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE016921-E0AD-4D40-913A-AAC3A44E7EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE016921-E0AD-4D40-913A-AAC3A44E7EFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

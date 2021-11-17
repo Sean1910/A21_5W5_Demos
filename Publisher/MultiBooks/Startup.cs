@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using MultiBooks_DataAccess.Repositoy;
 using MultiBooks_DataAccess.Repositoy.IRepository;
+using Microsoft.AspNetCore.Identity;
+using MultiBooks_DataAccess.Initializer;
 
 namespace MultiBooks
 {
@@ -32,7 +34,22 @@ namespace MultiBooks
                    Configuration.GetConnectionString("DefaultConnection")
                    ));
 
+      // Injecter le service pour Identity
+      //services.AddDefaultIdentity<IdentityUser>()
+      //      .AddEntityFrameworkStores<MultiBooksDbContext>();
+      services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<MultiBooksDbContext>();
+
       services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+      services.AddScoped<IDbInitializer, DbInitializer>();
+
+      //Authentification Facebook
+      services.AddAuthentication().AddFacebook(Options =>
+      {
+        Options.AppId = "460923792024887";
+        Options.AppSecret = "73f024b6c5b3ea9ebacf810f08cf6d30";
+      });
 
       services.AddControllersWithViews().AddRazorRuntimeCompilation();
     }
@@ -55,10 +72,14 @@ namespace MultiBooks
 
       app.UseRouting();
 
+      // Mettre l'authentification AVANT l'authorization
+      app.UseAuthentication();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>
       {
+        // Ajouter le routing pour les pages Razor d'Identity
+        endpoints.MapRazorPages();
         endpoints.MapControllerRoute(
                     name: "Customer",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");

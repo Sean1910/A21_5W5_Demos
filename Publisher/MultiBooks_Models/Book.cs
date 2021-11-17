@@ -28,6 +28,11 @@ namespace MultiBooks_Models
    
     public bool Available { get; set; } = true;
 
+    public string Resume { get; set; }
+
+    [MaxLength(60)]
+    public string Cover { get; set; }
+
     // Relation 1 à plusieurs, obligatoire
     [ForeignKey("Publisher")]
     public int Publisher_Id { get; set; }

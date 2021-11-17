@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MultiBooks.Areas.Author.Controllers
+namespace MultiBooks.Areas.Authors.Controllers
 {
   [Area("Author")]
   public class HomeController : Controller

@@ -75,6 +75,52 @@ namespace MultiBooks.Areas.Publishers.Controllers
       return View(publisher);
     }
 
+    //GET - UPSERT
+    public async Task<IActionResult> Upsert(int? id)
+    {
+      Publisher publisher = new Publisher();
+      if (id == null)
+      {
+        //CREATE
+        return View(publisher);
+      }
+      else
+      {
+        //EDIT
+        publisher = await _unitOfWork.Publisher.GetAsync(id.GetValueOrDefault());
+        if (publisher == null)
+        {
+          return NotFound();
+        }
+        return View(publisher);
+      }
+
+    }
+
+    //POST - UPSERT
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Upsert(Publisher publisher)
+    {
+      if (ModelState.IsValid)
+      {
+        if (publisher.Id == 0)
+        {
+          await _unitOfWork.Publisher.AddAsync(publisher);
+
+        }
+        else
+        {
+          _unitOfWork.Publisher.Update(publisher);
+        }
+        _unitOfWork.Save();
+        return RedirectToAction(nameof(Index));
+      }
+      return View(publisher);
+    }
+
+
+
     public async Task<IActionResult> Detail(int id)
     {
       PublisherVM PublisherVM = new PublisherVM()
@@ -84,6 +130,41 @@ namespace MultiBooks.Areas.Publishers.Controllers
 
       };
       return View(PublisherVM);
+    }
+
+
+    //GET DELETE
+    public async Task<IActionResult> Delete(int? id)
+    {
+      if (id == null || id == 0)
+      {
+        return NotFound();
+      }
+
+      var obj = await _unitOfWork.Publisher.GetAsync(id.GetValueOrDefault());
+      if (obj == null)
+      {
+        return NotFound();
+      }
+
+      return View(obj);
+    }
+
+    //POST DELETE
+    [HttpPost]
+    [AutoValidateAntiforgeryToken]
+    public async Task<IActionResult> DeletePost(int? id)
+    {
+      var obj = await _unitOfWork.Publisher.GetAsync(id.GetValueOrDefault());
+      if (obj == null)
+      {
+        return NotFound();
+      }
+
+      await _unitOfWork.Publisher.RemoveAsync(obj);
+      _unitOfWork.Save();
+
+      return RedirectToAction("Index");
     }
   }
 }
